@@ -47,8 +47,10 @@ dependencies:
   path_provider: ^2.0.7
   permission_handler: ^8.3.0
   rxdart: ^0.27.3
-  sentry_flutter: ^6.1.2
   shared_preferences: ^2.0.9
+  google_fonts: ^6.1.0
+  animated_bottom_navigation_bar: ^1.3.3
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
   flutter_test:

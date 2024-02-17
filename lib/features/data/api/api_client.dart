@@ -165,6 +165,25 @@ class ApiClient extends GetxService {
     }
   }
 
+  Future<Response> postLogin(String uri, dynamic body) async {
+    _mainHeaders['Content-Type'] = 'application/x-www-form-urlencoded';
+    _mainHeaders['Authorization'] = 'Basic Y29yZV9jbGllbnQ6c2VjcmV0';
+    try {
+      if (Foundation.kDebugMode) {
+        print('====> API Call: $uri\nHeader: $_mainHeaders');
+        print('====> API Body: ${jsonEncode(body).toString()}');
+      }
+      Http.Response _response = await Http.post(
+          Uri.parse(AppConstants.BASE_URL + uri),
+          body: body,
+          headers: _mainHeaders
+      ).timeout(Duration(seconds: timeoutInSeconds));
+      return handleResponse(_response, uri);
+    } catch (e) {
+      return Response(statusCode: 1, statusText: noInternetMessage);
+    }
+  }
+
   Response handleResponse(Http.Response response, String uri) {
     dynamic _body;
     try {

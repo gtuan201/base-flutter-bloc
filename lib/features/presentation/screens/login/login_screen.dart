@@ -32,24 +32,31 @@ class LoginScreen extends StatelessWidget {
                 Center(child: Image.asset(Images.bigLogo,width: 200,height: 200,)),
                 Text('Đăng nhập',style: TextStyle(fontSize: 32,fontWeight: FontWeight.w700,color: Colors.grey.shade700),),
                 SizedBox(height: Get.height*0.016,),
-                BlocBuilder<SignInBloc,LoginState>(builder: (context,state){
-                  return TextField(
-                    controller: _usernameCtrl,
-                    keyboardType: TextInputType.text,
-                    onChanged: (username){
-                      context.read<SignInBloc>().add(OnEmailChange(username));
-                    },
-                    style: const TextStyle(fontWeight: FontWeight.w400),
-                    decoration: InputDecoration(
-                      errorText: state.username.isEmpty ? "Không được bỏ trống" : null,
-                      prefixIcon: const Icon(Icons.person),
-                      hintText: 'Email/Username đã đăng ký',
-                      hintStyle: const TextStyle(fontWeight: FontWeight.w400),
-                    ),
-                  );
-                }),
+                BlocBuilder<SignInBloc,LoginState>(
+                  buildWhen: (previous,current){
+                    return previous.username != current.username;
+                  },
+                  builder: (context,state){
+                    return TextField(
+                      controller: _usernameCtrl,
+                      keyboardType: TextInputType.text,
+                      onChanged: (username){
+                        context.read<SignInBloc>().add(OnEmailChange(username));
+                      },
+                      style: const TextStyle(fontWeight: FontWeight.w400),
+                      decoration: InputDecoration(
+                        errorText: state.username.isEmpty ? "Không được bỏ trống" : null,
+                        prefixIcon: const Icon(Icons.person),
+                        hintText: 'Email/Username đã đăng ký',
+                        hintStyle: const TextStyle(fontWeight: FontWeight.w400),
+                      ),
+                    );
+                  }),
                 SizedBox(height: Get.height*0.016,),
                 BlocBuilder<SignInBloc,LoginState>(
+                  buildWhen: (previous,current){
+                    return previous.password != current.password || previous.isShowPassword != current.isShowPassword;
+                  },
                   builder: (context,state){
                     return TextField(
                       controller: _passwordCtrl,
@@ -74,16 +81,27 @@ class LoginScreen extends StatelessWidget {
                   },
                 ),
                 SizedBox(height: Get.height*0.06,),
-                ElevatedButton(
-                    onPressed: () {
-                      FocusScope.of(context).unfocus();
-                      context.read<SignInBloc>().add(PressLogin(_usernameCtrl.text, _passwordCtrl.text));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(Get.width - 32, 54)
-                    ),
-                    child: const Text("Đăng nhập",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,letterSpacing: 2),)
-                ),
+                BlocBuilder<SignInBloc,LoginState>(
+                  buildWhen: (previous,current){
+                    return previous.isLoading != current.isLoading;
+                  },
+                  builder: (context,state) {
+                    return ElevatedButton(
+                        onPressed: () {
+                          if(!state.isLoading){
+                            FocusScope.of(context).unfocus();
+                            context.read<SignInBloc>().add(PressLogin(_usernameCtrl.text, _passwordCtrl.text));
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            fixedSize: Size(Get.width - 32, 54)
+                        ),
+                        child: state.isLoading ? const SizedBox(
+                          height: 32,
+                            width: 26,
+                            child: CircularProgressIndicator(color: Colors.white,)) : const Text("Đăng nhập",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w700,letterSpacing: 2),)
+                    );
+                  }),
                 SizedBox(height: Get.height*0.03,),
                 InkWell(
                     onTap: (){},

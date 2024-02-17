@@ -5,6 +5,7 @@ class AppConstants{
   /// api
   static const String BASE_URL = 'http://timesheet-dev.oceantech.com.vn';
   static const String GET_CURRENT_USER = '/timesheet/api/v1/users/current';
+  static const String LOGIN_URI = '/timesheet/oauth/token';
   /// sharepreferent key
   static const String TOKEN = 'token';
   static const String LANGUAGE_CODE = 'language_code';

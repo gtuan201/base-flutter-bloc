@@ -37,10 +37,10 @@ class _SplashScreenState extends State<SplashScreen> {
         child: BlocListener<SplashBloc,SplashState>(
           listener: (context,state){
             if(state is Success){
-              Get.off(() => HomeScreen());
+              Get.off(() => const HomeScreen());
             }
             if(state is Failure){
-              Get.off(() => LoginScreen());
+              Get.off(() => HomeScreen());
             }
           },
           child: Container(
