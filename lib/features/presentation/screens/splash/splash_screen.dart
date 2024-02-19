@@ -1,7 +1,7 @@
 import 'package:clean_architect/features/presentation/blocs/splash/splash_event.dart';
 import 'package:clean_architect/features/presentation/blocs/splash/splash_state.dart';
 import 'package:clean_architect/features/presentation/components/utility/color_resource.dart';
-import 'package:clean_architect/features/presentation/screens/home/home_screen.dart';
+import 'package:clean_architect/features/presentation/screens/dash_board/dart_board_screen.dart';
 import 'package:clean_architect/features/presentation/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,10 +37,10 @@ class _SplashScreenState extends State<SplashScreen> {
         child: BlocListener<SplashBloc,SplashState>(
           listener: (context,state){
             if(state is Success){
-              Get.off(() => const HomeScreen());
+              Get.off(() => const DashBoardScreen());
             }
             if(state is Failure){
-              Get.off(() => HomeScreen());
+              Get.off(() => LoginScreen());
             }
           },
           child: Container(

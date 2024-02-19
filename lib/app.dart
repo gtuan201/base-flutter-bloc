@@ -1,3 +1,4 @@
+import 'package:clean_architect/features/presentation/blocs/setting_bloc/setting_bloc.dart';
 import 'package:clean_architect/features/presentation/blocs/splash/splash_bloc.dart';
 import 'package:clean_architect/features/presentation/components/utility/app_theme.dart';
 import 'package:clean_architect/features/presentation/screens/splash/splash_screen.dart';
@@ -33,6 +34,7 @@ class _MyAppState extends State<MyApp> {
         providers: [
           BlocProvider<SplashBloc>(create: (context) => sl<SplashBloc>()),
           BlocProvider<SignInBloc>(create: (context) => sl<SignInBloc>()),
+          BlocProvider<SettingBloc>(create: (context) => sl<SettingBloc>()),
         ],
         child: GetMaterialApp(
           debugShowCheckedModeBanner: false,

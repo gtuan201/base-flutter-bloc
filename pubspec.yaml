@@ -36,7 +36,7 @@ dependencies:
   google_maps_flutter: ^2.1.1
   hive: ^2.0.4
   hive_flutter: ^1.1.0
-  image: ^3.0.8
+  image: ^4.0.15
   image_picker: ^0.8.4+4
   infinite_scroll_pagination: ^3.1.0
   intl: ^0.18.0
@@ -51,6 +51,14 @@ dependencies:
   google_fonts: ^6.1.0
   animated_bottom_navigation_bar: ^1.3.3
   font_awesome_flutter: ^10.7.0
+  flutter_launcher_icons: ^0.13.1
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/img/big_logo.png"
+  min_sdk_android: 21
 
 dev_dependencies:
   flutter_test:

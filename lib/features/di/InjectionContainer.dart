@@ -4,6 +4,7 @@ import 'package:clean_architect/features/data/repositories/splash_repo.dart';
 import 'package:clean_architect/features/presentation/blocs/sign_in_bloc/sign_in_bloc.dart';
 import 'package:get_it/get_it.dart';
 import '../../core/env/config.dart';
+import '../presentation/blocs/setting_bloc/setting_bloc.dart';
 import '../presentation/blocs/splash/splash_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,6 +34,7 @@ Future<void> init() async {
   ///
   sl.registerFactory(() => SplashBloc());
   sl.registerFactory(() => SignInBloc());
+  sl.registerFactory(() => SettingBloc());
 
   ///[Repository]
   sl.registerFactory(() => SplashRepo(apiClient: sl(), sharedPreferences: sl()));
